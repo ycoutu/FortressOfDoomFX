@@ -24,4 +24,8 @@ public class GameScreenController implements Initializable {
         // TODO
     }    
     
+    public void gatherPowerClicked() {
+        System.out.println("Gather power button was clicked");
+    }
+    
 }

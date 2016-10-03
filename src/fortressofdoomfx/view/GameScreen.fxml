@@ -24,17 +24,17 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Recover Power" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                                    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#gatherPowerClicked" text="Recover Power" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
                                  </children>
                               </AnchorPane>
                         </content>
                       </Tab>
-                      <Tab id = "forestTab" closable="false" disable="true" text="A Dark Forest" style="visibility: visible;">
+                      <Tab id="forestTab" closable="false" disable="true" style="visibility: visible;" text="A Dark Forest">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                         </content>
                       </Tab>
-                        <Tab closable="false" disable="true" text="A Meandering Road" style="visibility: hidden;">
+                        <Tab closable="false" disable="true" style="visibility: hidden;" text="A Meandering Road">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                           </content>

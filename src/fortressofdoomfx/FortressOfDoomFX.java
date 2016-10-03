@@ -5,6 +5,7 @@
  */
 package fortressofdoomfx;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,6 +13,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 /**
  *
@@ -19,28 +24,39 @@ import javafx.stage.Stage;
  */
 public class FortressOfDoomFX extends Application {
     
+    private Stage stage = null;
+    private AnchorPane gamescreen;
+    
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
         
+        //This sets the primary stage of the application
+        stage = primaryStage;
         StackPane root = new StackPane();
-        root.getChildren().add(btn);
         
-        Scene scene = new Scene(root, 300, 250);
+        //Calls the showGamescreen method in this class
+        this.showGamescreen();
         
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
-
+    
+    public void showGamescreen() {
+        try {
+            // Load the gamescreen
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(FortressOfDoomFX.class.getResource("view/GameScreen.fxml"));
+            AnchorPane game = (AnchorPane) loader.load();
+            
+            Scene scene = new Scene(game);
+            //Sets the title of the "JFrame"
+            stage.setTitle("Fortress of Doom");
+            stage.setScene(scene);
+            stage.show();
+        } 
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */

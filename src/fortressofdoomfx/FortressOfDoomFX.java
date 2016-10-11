@@ -20,12 +20,18 @@ import javafx.scene.layout.StackPane;
 
 /**
  *
- * @author Aosys
+ * @author Team Minion Patrol
  */
 public class FortressOfDoomFX extends Application {
     
     private Stage stage = null;
     private AnchorPane gamescreen;
+    
+    public FortressOfDoomFX() {
+        fortressofdoomfx.model.MainGameModel model = new fortressofdoomfx.model.MainGameModel();
+    }
+    
+    //fortressofdoomfx.model.Resources resource = new fortressofdoomfx.model.Resources();
     
     @Override
     public void start(Stage primaryStage) {
@@ -61,6 +67,7 @@ public class FortressOfDoomFX extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         launch(args);
     }
     

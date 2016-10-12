@@ -29,9 +29,12 @@
                               </AnchorPane>
                         </content>
                       </Tab>
-                      <Tab id="forestTab" closable="false" disable="false" style="visibility: visible;" text="A Dark Forest">
+                      <Tab id="forestTab" fx:id="forestTab" closable="false" disable="true" style="visibility: hidden;" text="A Dark Forest">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#gatherWoodClicked" text="Gather Wood" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                                 </children></AnchorPane>
                         </content>
                       </Tab>
                         <Tab closable="false" disable="true" style="visibility: hidden;" text="A Meandering Road">

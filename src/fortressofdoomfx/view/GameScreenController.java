@@ -10,7 +10,9 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import fortressofdoomfx.FortressOfDoomFX;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextArea;
 
 
 /**
@@ -21,6 +23,9 @@ import javafx.scene.control.Tab;
 public class GameScreenController implements Initializable {
 
     @FXML private Tab forestTab;
+    @FXML private Button gatherPowerButton;
+    @FXML private Button gatherWoodButton;
+    @FXML private TextArea messages;
     
     fortressofdoomfx.model.Resources resource = new fortressofdoomfx.model.Resources();
     /**
@@ -30,16 +35,22 @@ public class GameScreenController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        //Append this message on game startup
+        messages.appendText("old bones shiver in the dark." + "\n" + 
+                "the shadows coalesce." + "\n" + "they form a being." +
+                "\n" + "you." + "\n");
     }    
     
     public void gatherPowerClicked() {
         //Debug text
         System.out.println("Gather power button was clicked");
         
+        //Append this message to the textarea when the button is clicked
+        messages.appendText("your power is growing..." + "\n");
+                
         //resource = MainGameModel.getResourceClass();
         
-        //Increment the power by 2 per button press using Resources'
+        //Increment the power up by 2 per button press using Resources'
         //incrementPower() method
         resource.incrementPower();
         
@@ -52,6 +63,11 @@ public class GameScreenController implements Initializable {
     }
     
     public void gatherWoodClicked() {
+        //Increment wood up by 10 per button press using Resources'
+        //incrementWood() method
         resource.incrementWood();
+        
+        //Append this message to the textarea when the button is clicked
+        messages.appendText("not very glamorous, but wood is useful." + "\n");
     }
 }

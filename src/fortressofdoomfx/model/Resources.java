@@ -30,23 +30,26 @@ public class Resources {
         else if (hut == 1) {
             hutCost = 150;
         }
-        else if (hut == 3) {
+        else if (hut == 2) {
             hutCost = 200;
         }
-        else if (hut == 4) {
+        else if (hut == 3) {
             hutCost = 250;
         }
-        else if (hut == 5) {
+        else if (hut == 4) {
             hutCost = 300;
         }
-        else if (hut == 6) {
+        else if (hut == 5) {
             hutCost = 350;
         }
-        else if (hut == 7) {
+        else if (hut == 6) {
             hutCost = 400;
         }
-        else if (hut == 8) {
+        else if (hut == 7) {
             hutCost = 450;
+        }
+        else if (hut == 8) {
+            hutCost = 500;
         }
         else if (hut == 9) {
             hutCost = 500;

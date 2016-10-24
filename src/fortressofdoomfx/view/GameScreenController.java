@@ -25,8 +25,9 @@ public class GameScreenController implements Initializable {
     @FXML private Tab forestTab;
     @FXML private Button gatherPowerButton;
     @FXML private Button gatherWoodButton;
+    @FXML private Button buildHutButton;
     @FXML private TextArea messages;
-    
+
     fortressofdoomfx.model.Resources resource = new fortressofdoomfx.model.Resources();
     /**
      * Initializes the controller class.
@@ -69,5 +70,19 @@ public class GameScreenController implements Initializable {
         
         //Append this message to the textarea when the button is clicked
         messages.appendText("not very glamorous, but wood is useful." + "\n");
+        
+        //Unhide build hut button
+        if (resource.getWood() >= 50) {
+            buildHutButton.setDisable(false);
+            buildHutButton.setStyle("visibility: visible;");
+        }
+    }
+    
+    public void buildHutClicked() {
+        //Increment hut and decrement wood
+        resource.incrementHut();
+        
+        //Append this message to the textarea when the button is clicked
+        messages.appendText("a hut is built, now minions will come." + "\n");
     }
 }

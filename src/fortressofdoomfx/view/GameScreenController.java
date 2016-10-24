@@ -79,10 +79,23 @@ public class GameScreenController implements Initializable {
     }
     
     public void buildHutClicked() {
+        //Append this message to the textarea when the button is clicked
+        if (resource.getHut() < 10 && (resource.getWood() >= resource.getHutCost())) {
+            messages.appendText("a hut is built, now minions will come." + "\n");
+        }
+        else if (resource.getHut() < 10 && (resource.getWood() < resource.getHutCost())) {
+            messages.appendText("can't build a hut. not enough wood." + "\n");
+        }
+        else if (resource.getHut() == 10) {
+            messages.appendText("no more room for huts." + "\n");
+        }
+        else {
+            System.out.println("Unknown Error: Someone dun goofed.");
+        }
+
         //Increment hut and decrement wood
         resource.incrementHut();
         
-        //Append this message to the textarea when the button is clicked
-        messages.appendText("a hut is built, now minions will come." + "\n");
+        
     }
 }

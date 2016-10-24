@@ -7,7 +7,7 @@ public class Resources {
     int power = 0;
     int wood = 0;
     int hut = 0;
-    int woodLimit = 100;
+    int hutCost = 100;
     
     public Resources() {
         //Constructor doesn't do anything
@@ -24,56 +24,81 @@ public class Resources {
     }
     
     public void incrementHut() {
-        if (wood < woodLimit) {
+        if (hut == 0) {
+            hutCost = 100;
+        }
+        else if (hut == 1) {
+            hutCost = 150;
+        }
+        else if (hut == 3) {
+            hutCost = 200;
+        }
+        else if (hut == 4) {
+            hutCost = 250;
+        }
+        else if (hut == 5) {
+            hutCost = 300;
+        }
+        else if (hut == 6) {
+            hutCost = 350;
+        }
+        else if (hut == 7) {
+            hutCost = 400;
+        }
+        else if (hut == 8) {
+            hutCost = 450;
+        }
+        else if (hut == 9) {
+            hutCost = 500;
+        }
+        else if (hut == 10) {
+            hutCost = 0;
+        }
+        else {
+            System.out.println("??????????");
+        }
+        
+        if (wood < hutCost) {
             System.out.println("Not enough wood!");
         }
-        else if (hut == 0 && wood >= woodLimit) {
-            wood -= woodLimit;
-            woodLimit = 150;
+        else if (hut == 0 && wood >= hutCost) {
+            wood -= hutCost;
             hut += 1;
         }
-        else if (hut == 1 && wood >= woodLimit) {
-            wood -= woodLimit;
-            woodLimit = 200;
+        else if (hut == 1 && wood >= hutCost) {
+            wood -= hutCost;
             hut += 1;
         }
-        else if (hut == 2 && wood >= woodLimit) {
-            wood -= woodLimit;
-            woodLimit = 250;
+        else if (hut == 2 && wood >= hutCost) {
+            wood -= hutCost;
             hut += 1;
         }  
-        else if (hut == 3 && wood >= woodLimit) {
-            wood -= woodLimit;
-            woodLimit = 300;
+        else if (hut == 3 && wood >= hutCost) {
+            wood -= hutCost;
             hut += 1;
         }
-        else if (hut == 4 && wood >= woodLimit) {
-            wood -= woodLimit;
-            woodLimit = 350;
+        else if (hut == 4 && wood >= hutCost) {
+            wood -= hutCost;
             hut += 1;
         } 
-        else if (hut == 5 && wood >= woodLimit) {
-            wood -= woodLimit;
-            woodLimit = 400;
+        else if (hut == 5 && wood >= hutCost) {
+            wood -= hutCost;
             hut += 1;
         }
-        else if (hut == 6 && wood >= woodLimit) {
-            wood -= woodLimit;
-            woodLimit = 500;
+        else if (hut == 6 && wood >= hutCost) {
+            wood -= hutCost;
             hut += 1;
         }
-        else if (hut == 7 && wood >= woodLimit) {
-            wood -= woodLimit;
-            woodLimit = 600;
+        else if (hut == 7 && wood >= hutCost) {
+            wood -= hutCost;
             hut += 1;
         } 
-        else if (hut == 8 && wood >= woodLimit) {
-            wood -= woodLimit;
-            woodLimit = 700;
+        else if (hut == 8 && wood >= hutCost) {
+            wood -= hutCost;
             hut += 1;
         }
-        else if (hut == 9 && wood >= woodLimit) {
-            wood -= woodLimit;
+        else if (hut == 9 && wood >= hutCost) {
+            wood -= hutCost;
             hut += 1;
         }
         else if (hut >= 10) {
@@ -93,5 +118,13 @@ public class Resources {
     
     public int getWood() {
         return wood;
+    }
+    
+    public int getHut() {
+        return hut;
+    }
+    
+    public int getHutCost() {
+        return hutCost;
     }
 }

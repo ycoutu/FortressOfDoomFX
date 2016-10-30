@@ -8,6 +8,10 @@ public class Resources {
     int wood = 0;
     int hut = 0;
     int hutCost = 100;
+    int minion = 0;
+    int trap = 0;
+    int trapCost = 10;
+    boolean cart = false;
     
     public Resources() {
         //Constructor doesn't do anything
@@ -19,11 +23,63 @@ public class Resources {
     }
     
     public void incrementWood() {
-        wood += 10;
+        if (cart == false) {
+            wood += 10;
+        }
+        else if (cart == true) {
+            wood += 30;
+        }
+        else {
+            System.out.println("U broked da wood");
+        }
         System.out.println("Wood: " + wood);
     }
     
-    public void incrementHut() {
+    public void incrementCart() {
+        if (cart == false && wood >= 30) {
+            wood -= 30;
+            cart = true;
+        }
+        System.out.println("Wood: " + wood);
+    }
+    
+    public void setTrapCost() {
+        if (trap == 0) {
+            trapCost = 10;
+        }
+        if (trap == 1) {
+            trapCost = 20;
+        }
+        if (trap == 2) {
+            trapCost = 30;
+        }
+        if (trap == 3) {
+            trapCost = 40;
+        }
+        if (trap == 4) {
+            trapCost = 50;
+        }
+        if (trap == 5) {
+            trapCost = 60;
+        }
+        if (trap == 6) {
+            trapCost = 70;
+        }
+        if (trap == 7) {
+            trapCost = 80;
+        }
+        if (trap == 8) {
+            trapCost = 90;
+        }
+        if (trap == 9) {
+            trapCost = 100;
+        }
+        if (trap == 10) {
+            trapCost = 0;
+        }
+    }
+    
+    public void setHutCost() {
         if (hut == 0) {
             hutCost = 100;
         }
@@ -60,47 +116,36 @@ public class Resources {
         else {
             System.out.println("??????????");
         }
+    }
+    
+    public void incrementTrap() {
+        this.setTrapCost();
+        
+        if (wood < trapCost) {
+            System.out.println("Not enough wood!");
+        }
+        else if (trap >= 0 && trap < 10 && wood >= trapCost) {
+            wood -= trapCost;
+            trap += 1;
+        }
+        else if (trap >= 10) {
+            System.out.println("Maxed out huts!");
+        }
+        else {
+            System.out.println("Trapz y u no work?!?");
+        }
+        
+        System.out.println("Trap: " + trap);
+        System.out.println("Wood: " + wood);
+    }
+    
+    public void incrementHut() {
+        this.setHutCost();
         
         if (wood < hutCost) {
             System.out.println("Not enough wood!");
         }
-        else if (hut == 0 && wood >= hutCost) {
-            wood -= hutCost;
-            hut += 1;
-        }
-        else if (hut == 1 && wood >= hutCost) {
-            wood -= hutCost;
-            hut += 1;
-        }
-        else if (hut == 2 && wood >= hutCost) {
-            wood -= hutCost;
-            hut += 1;
-        }  
-        else if (hut == 3 && wood >= hutCost) {
-            wood -= hutCost;
-            hut += 1;
-        }
-        else if (hut == 4 && wood >= hutCost) {
-            wood -= hutCost;
-            hut += 1;
-        } 
-        else if (hut == 5 && wood >= hutCost) {
-            wood -= hutCost;
-            hut += 1;
-        }
-        else if (hut == 6 && wood >= hutCost) {
-            wood -= hutCost;
-            hut += 1;
-        }
-        else if (hut == 7 && wood >= hutCost) {
-            wood -= hutCost;
-            hut += 1;
-        } 
-        else if (hut == 8 && wood >= hutCost) {
-            wood -= hutCost;
-            hut += 1;
-        }
-        else if (hut == 9 && wood >= hutCost) {
+        else if (hut >= 0 && hut < 10 && wood >= hutCost) {
             wood -= hutCost;
             hut += 1;
         }
@@ -113,6 +158,7 @@ public class Resources {
         }
         
         System.out.println("Huts: " + hut);
+        System.out.println("Wood: " + wood);
     }
     
     public int getPower() {
@@ -129,5 +175,17 @@ public class Resources {
     
     public int getHutCost() {
         return hutCost;
+    }
+    
+    public int getTrap() {
+        return trap;
+    }
+    
+    public int getTrapCost() {
+        return trapCost;
+    }
+    
+    public boolean getCart() {
+        return cart;
     }
 }

@@ -33,6 +33,10 @@ public class GameScreenController implements Initializable {
     @FXML private Button buildCartButton;
     @FXML private Label buildLabel;
     @FXML private TextArea messages;
+    
+    //@FXML private Timer timerfx;
+    Timer timer = new Timer();
+
 
     fortressofdoomfx.model.Resources resource = new fortressofdoomfx.model.Resources();
     /**
@@ -45,37 +49,39 @@ public class GameScreenController implements Initializable {
         //Append this message on game startup
         messages.appendText("old bones shiver in the dark." + "\n" + 
                 "the shadows coalesce." + "\n" + "they form a being." +
-                "\n" + "you." + "\n");
+                "\n" + "you." + "\n" + "\n");
+        
+        
     }
     
-//    public void buttonCooldown(Button button, int duration)
-//    {
-//        //Disable Button
-//        button.setDisable(true);
-//        
-//        //Create task
-//        TimerTask tTask = new TimerTask()
-//        {
-//            @Override
-//            public void run()
-//            {
-//                //Enable Button
-//                button.setDisable(false);
-//                //System.out.println("Inside of TimerTask");
-//            }
-//        };
-//        //Set timer
-//        Timer timer = new Timer();
-//        //Set timer schedule run tTask after duration=time
-//        timer.schedule(tTask, duration);
-//    }
+    public void buttonCooldown(Button button, int duration)
+    {
+        //Disable Button
+        button.setDisable(true);
+        
+        //Create task
+        TimerTask tTask = new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                //Enable Button
+                button.setDisable(false);
+                //System.out.println("Inside of TimerTask");
+            }
+        };
+        //Set timer
+        //Timer timer = new Timer();
+        //Set timer schedule run tTask after duration=time
+        timer.schedule(tTask, duration);
+    }
     
     public void gatherPowerClicked() {
         //Debug text
-        System.out.println("Gather power button was clicked");
+        System.out.println("Gather power button was clicked" + "\n");
         
         //Append this message to the textarea when the button is clicked
-        messages.appendText("your power is growing..." + "\n");
+        messages.appendText("your power is growing..." + "\n" + "\n");
                 
         //resource = MainGameModel.getResourceClass();
         
@@ -90,7 +96,8 @@ public class GameScreenController implements Initializable {
             forestTab.setStyle("visibility: visible;");
         }
         
-        //this.buttonCooldown(gatherPowerButton,5000);
+        this.buttonCooldown(gatherPowerButton,5000);
+        
     }
     
     public void gatherWoodClicked() {

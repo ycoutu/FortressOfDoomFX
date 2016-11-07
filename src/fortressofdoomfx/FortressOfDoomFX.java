@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -57,6 +58,14 @@ public class FortressOfDoomFX extends Application {
             stage.setTitle("Fortress of Doom");
             stage.setScene(scene);
             stage.show();
+            
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                public void handle(WindowEvent we) {
+                    System.out.println("Stage is closing");
+                    stage.close();
+                    System.exit(0);
+                }
+            });
         } 
         catch (IOException e) {
             e.printStackTrace();

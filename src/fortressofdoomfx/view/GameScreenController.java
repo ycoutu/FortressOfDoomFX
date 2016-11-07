@@ -34,6 +34,14 @@ public class GameScreenController implements Initializable {
     @FXML private Label buildLabel;
     @FXML private TextArea messages;
     
+    @FXML private Label ruinPowerLabel;
+    @FXML private Label forestPowerLabel;
+    @FXML private Label ruinWoodLabel;
+    @FXML private Label forestWoodLabel;
+    @FXML private Label forestCartLabel;
+    @FXML private Label forestTrapLabel;
+    @FXML private Label forestHutLabel;
+    
     //@FXML private Timer timerfx;
     Timer timer = new Timer();
 
@@ -51,7 +59,14 @@ public class GameScreenController implements Initializable {
                 "the shadows coalesce." + "\n" + "they form a being." +
                 "\n" + "you." + "\n" + "\n");
         
-        
+        //Set initial label text
+        ruinPowerLabel.setText("");
+        forestPowerLabel.setText("");
+        ruinWoodLabel.setText("");
+        forestWoodLabel.setText("");
+        forestCartLabel.setText("");
+        forestTrapLabel.setText("");
+        forestHutLabel.setText("");
     }
     
     public void buttonCooldown(Button button, int duration)
@@ -89,6 +104,10 @@ public class GameScreenController implements Initializable {
         //incrementPower() method
         resource.incrementPower();
         
+        //Labels
+        ruinPowerLabel.setText(Integer.toString(resource.getPower()));
+        forestPowerLabel.setText(Integer.toString(resource.getPower()));
+        
         //Unhide and enable the Dark Forest tab
         if(resource.getPower() > 6) {
             //btnGatherStone.setVisible(true);
@@ -107,6 +126,10 @@ public class GameScreenController implements Initializable {
         
         //Append this message to the textarea when the button is clicked
         messages.appendText("not very glamorous, but wood is useful." + "\n");
+        
+        //Labels
+        ruinWoodLabel.setText(Integer.toString(resource.getWood()));
+        forestWoodLabel.setText(Integer.toString(resource.getWood()));
         
         //Unhide build hut button
         if (resource.getWood() >= 10) {
@@ -129,6 +152,11 @@ public class GameScreenController implements Initializable {
             resource.incrementCart();
             messages.appendText("the rickety cart will carry more wood from the forest."
         + "\n");
+            
+            //Label
+            forestCartLabel.setText(Integer.toString(1));
+            ruinWoodLabel.setText(Integer.toString(resource.getWood()));
+            forestWoodLabel.setText(Integer.toString(resource.getWood()));
         }
         else {
             System.out.println("heyo, you already have a cart!");
@@ -138,20 +166,26 @@ public class GameScreenController implements Initializable {
     }
      
      public void buildTrapClicked() {
-         if (resource.getTrap() < 10 && (resource.getWood() >= resource.getTrapCost())) {
-             resource.incrementTrap();
-             messages.appendText("more traps to catch more creatures." + "\n");
-             if (resource.getTrap() == 10) {
-                 buildTrapButton.setDisable(true);
-             }
-         }
-         else if (resource.getTrap() < 10 && (resource.getWood() < resource.getTrapCost())) {
-             messages.appendText("can't build a trap. not enough wood." + "\n");
-         }
-         else {
-             System.out.println("Something is broken.");
-         }
-     }
+        if (resource.getTrap() < 10 && (resource.getWood() >= resource.getTrapCost())) {
+            resource.incrementTrap();
+            messages.appendText("more traps to catch more creatures." + "\n");
+             
+            //Label
+            forestTrapLabel.setText(Integer.toString(resource.getTrap()));
+            ruinWoodLabel.setText(Integer.toString(resource.getWood()));
+            forestWoodLabel.setText(Integer.toString(resource.getWood()));
+             
+            if (resource.getTrap() == 10) {
+                buildTrapButton.setDisable(true);
+            }
+        }
+        else if (resource.getTrap() < 10 && (resource.getWood() < resource.getTrapCost())) {
+            messages.appendText("can't build a trap. not enough wood." + "\n");
+        }
+        else {
+            System.out.println("Something is broken.");
+        }
+    }
     
     
     public void buildHutClicked() {
@@ -161,6 +195,12 @@ public class GameScreenController implements Initializable {
         if (resource.getHut() < 10 && (resource.getWood() >= resource.getHutCost())) {
             resource.incrementHut();
             messages.appendText("a hut is built, now minions will come." + "\n");
+            
+            //Label
+            forestHutLabel.setText(Integer.toString(resource.getHut()));
+            ruinWoodLabel.setText(Integer.toString(resource.getWood()));
+            forestWoodLabel.setText(Integer.toString(resource.getWood()));
+            
             if (resource.getHut() == 10) {
                 buildHutButton.setDisable(true);
             }

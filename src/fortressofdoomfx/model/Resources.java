@@ -3,15 +3,21 @@ package fortressofdoomfx.model;
 
 //@author Team Minion Patrol
 
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
+
+
 public class Resources {
     int power = 0;
     int wood = 0;
     int hut = 0;
     int hutCost = 100;
     int minion = 0;
+    int minionCap = 0;
     int trap = 0;
     int trapCost = 10;
     boolean cart = false;
+     @FXML private TextArea messages;
     
     public Resources() {
         //Constructor doesn't do anything
@@ -33,6 +39,14 @@ public class Resources {
             System.out.println("U broked da wood");
         }
         System.out.println("Wood: " + wood);
+    }
+    public void incrementWoodOverTime()
+    {
+        if(minion > 1)
+        {
+            wood += 2 * minion; 
+            System.out.println("Wood: " + wood);
+        }
     }
     
     public void incrementCart() {
@@ -159,6 +173,24 @@ public class Resources {
         
         System.out.println("Huts: " + hut);
         System.out.println("Wood: " + wood);
+    }
+    public void incrementMinion()
+    {
+        minionCap = hut * 4;
+        if(minion < minionCap)
+        {
+            minion += 2; 
+         //messages.appendText("A loyal servant has joined your ranks.");
+         if(minion == minionCap)
+         {
+             //messages.appendText("Minion Capacity reached");
+             System.out.println("Minion capacity reached, build more huts");
+             
+         }
+        }
+        
+        System.out.println(minion + " Minions exist with " + hut + " Huts in existence" );
+       
     }
     
     public int getPower() {

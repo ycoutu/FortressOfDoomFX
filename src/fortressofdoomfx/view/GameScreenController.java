@@ -9,8 +9,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import fortressofdoomfx.FortressOfDoomFX;
+import java.time.Duration;
 import java.util.Timer;
 import java.util.TimerTask;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -43,14 +48,18 @@ public class GameScreenController implements Initializable {
     @FXML private Label forestHutLabel;
     
     //@FXML private Timer timerfx;
-    Timer timer = new Timer();
+    //private Timer timer = new Timer();
+   
 
+    //fortressofdoomfx.model.Resources resource = new fortressofdoomfx.model.Resources();
+    fortressofdoomfx.view.TimerClass tm = new fortressofdoomfx.view.TimerClass();
 
-    fortressofdoomfx.model.Resources resource = new fortressofdoomfx.model.Resources();
-    /**
-     * Initializes the controller class.
-     */
-    //fortressofdoomfx.model.Resources resource;
+    /*public GameScreenController() {
+        this.resource = new fortressofdoomfx.model.Resources();
+        
+    }*/
+    
+   
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -67,15 +76,17 @@ public class GameScreenController implements Initializable {
         forestCartLabel.setText("");
         forestTrapLabel.setText("");
         forestHutLabel.setText("");
+
+       tm.run();
+      
     }
-    
     public void buttonCooldown(Button button, int duration)
     {
         //Disable Button
         button.setDisable(true);
         
         //Create task
-        TimerTask tTask = new TimerTask()
+        TimerTask tButtonTask = new TimerTask()
         {
             @Override
             public void run()
@@ -88,8 +99,23 @@ public class GameScreenController implements Initializable {
         //Set timer
         //Timer timer = new Timer();
         //Set timer schedule run tTask after duration=time
-        timer.schedule(tTask, duration);
+        tm.timer.schedule(tButtonTask, duration);
     }
+    public void EventCheck()
+    {/*long seconds = 5;
+       // Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.ofSeconds(5), new EventHandler<ActionEvent>() {
+
+    @Override
+    public void handle(ActionEvent event) {
+        System.out.println("this is called every 5 seconds on UI thread");
+    }
+}));
+fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
+fiveSecondsWonder.play(); */
+    
+    }
+    
+    
     
     public void gatherPowerClicked() {
         //Debug text
@@ -102,61 +128,64 @@ public class GameScreenController implements Initializable {
         
         //Increment the power up by 2 per button press using Resources'
         //incrementPower() method
-        resource.incrementPower();
+        tm.event.resource.incrementPower();
         
         //Labels
-        ruinPowerLabel.setText(Integer.toString(resource.getPower()));
-        forestPowerLabel.setText(Integer.toString(resource.getPower()));
+        ruinPowerLabel.setText(Integer.toString(tm.event.resource.getPower()));
+        forestPowerLabel.setText(Integer.toString(tm.event.resource.getPower()));
         
         //Unhide and enable the Dark Forest tab
-        if(resource.getPower() > 6) {
+        if(tm.event.resource.getPower() > 6) {
             //btnGatherStone.setVisible(true);
             forestTab.setDisable(false);
             forestTab.setStyle("visibility: visible;");
+            //tm.run();
         }
         
-        this.buttonCooldown(gatherPowerButton,5000);
+        //this.buttonCooldown(gatherPowerButton,1000);
+            
         
     }
     
     public void gatherWoodClicked() {
         //Increment wood up by 10 per button press using Resources'
         //incrementWood() method
-        resource.incrementWood();
-        
+        tm.event.resource.incrementWood();
+       
         //Append this message to the textarea when the button is clicked
         messages.appendText("not very glamorous, but wood is useful." + "\n");
         
         //Labels
-        ruinWoodLabel.setText(Integer.toString(resource.getWood()));
-        forestWoodLabel.setText(Integer.toString(resource.getWood()));
+        ruinWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
+        forestWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
         
         //Unhide build hut button
-        if (resource.getWood() >= 10) {
+        if (tm.event.resource.getWood() >= 10) {
             buildLabel.setStyle("visibility: visible;");
             buildTrapButton.setDisable(false);
             buildTrapButton.setStyle("visibility: visible;");
         }
-        if (resource.getWood() >= 30 && resource.getCart() == false) {
+        if (tm.event.resource.getWood() >= 30 && tm.event.resource.getCart() == false) {
             buildCartButton.setDisable(false);
             buildCartButton.setStyle("visibility: visible;");
         }
-        if (resource.getWood() >= 100) {
+        if (tm.event.resource.getWood() >= 100) {
             buildHutButton.setDisable(false);
             buildHutButton.setStyle("visibility: visible;");
-        }
+        } 
+        this.buttonCooldown(gatherWoodButton, 1000);
     }
     
      public void cartClicked() {
-        if (resource.getCart() == false) {
-            resource.incrementCart();
+        if (tm.event.resource.getCart() == false) {
+            tm.event.resource.incrementCart();
             messages.appendText("the rickety cart will carry more wood from the forest."
         + "\n");
             
             //Label
             forestCartLabel.setText(Integer.toString(1));
-            ruinWoodLabel.setText(Integer.toString(resource.getWood()));
-            forestWoodLabel.setText(Integer.toString(resource.getWood()));
+            ruinWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
+            forestWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
         }
         else {
             System.out.println("heyo, you already have a cart!");
@@ -166,50 +195,56 @@ public class GameScreenController implements Initializable {
     }
      
      public void buildTrapClicked() {
-        if (resource.getTrap() < 10 && (resource.getWood() >= resource.getTrapCost())) {
-            resource.incrementTrap();
+
+        if (tm.event.resource.getTrap() < 10 && (tm.event.resource.getWood() >= tm.event.resource.getTrapCost())) {
+            tm.event.resource.incrementTrap();
             messages.appendText("more traps to catch more creatures." + "\n");
              
             //Label
-            forestTrapLabel.setText(Integer.toString(resource.getTrap()));
-            ruinWoodLabel.setText(Integer.toString(resource.getWood()));
-            forestWoodLabel.setText(Integer.toString(resource.getWood()));
+            forestTrapLabel.setText(Integer.toString(tm.event.resource.getTrap()));
+            ruinWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
+            forestWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
              
-            if (resource.getTrap() == 10) {
+            if (tm.event.resource.getTrap() == 10) {
                 buildTrapButton.setDisable(true);
             }
         }
-        else if (resource.getTrap() < 10 && (resource.getWood() < resource.getTrapCost())) {
+        else if (tm.event.resource.getTrap() < 10 && (tm.event.resource.getWood() < tm.event.resource.getTrapCost())) {
             messages.appendText("can't build a trap. not enough wood." + "\n");
         }
         else {
             System.out.println("Something is broken.");
         }
     }
-    
-    
+
     public void buildHutClicked() {
         
 
         //Append this message to the textarea when the button is clicked
-        if (resource.getHut() < 10 && (resource.getWood() >= resource.getHutCost())) {
-            resource.incrementHut();
+        if (tm.event.resource.getHut() < 10 && (tm.event.resource.getWood() >= tm.event.resource.getHutCost())) {
+            tm.event.resource.incrementHut();
             messages.appendText("a hut is built, now minions will come." + "\n");
             
             //Label
-            forestHutLabel.setText(Integer.toString(resource.getHut()));
-            ruinWoodLabel.setText(Integer.toString(resource.getWood()));
-            forestWoodLabel.setText(Integer.toString(resource.getWood()));
+            forestHutLabel.setText(Integer.toString(tm.event.resource.getHut()));
+            ruinWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
+            forestWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
             
-            if (resource.getHut() == 10) {
+            if (tm.event.resource.getHut() == 10) {
                 buildHutButton.setDisable(true);
             }
         }
-        else if (resource.getHut() < 10 && (resource.getWood() < resource.getHutCost())) {
+        else if (tm.event.resource.getHut() < 10 && (tm.event.resource.getWood() < tm.event.resource.getHutCost())) {
             messages.appendText("can't build a hut. not enough wood." + "\n");
         }
         else {
             System.out.println("Unknown Error: Someone dun goofed.");
         }        
     }
+    
+    public void updateWoodLabel() {
+        ruinWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
+        forestWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
+    }
+    
 }

@@ -27,9 +27,10 @@ public class FortressOfDoomFX extends Application {
     
     private Stage stage = null;
     private AnchorPane gamescreen;
-    
+      //fortressofdoomfx.view.TimerClass timerclass;
     public FortressOfDoomFX() {
         fortressofdoomfx.model.MainGameModel model = new fortressofdoomfx.model.MainGameModel();
+      
     }
     
     //fortressofdoomfx.model.Resources resource = new fortressofdoomfx.model.Resources();
@@ -43,6 +44,7 @@ public class FortressOfDoomFX extends Application {
         
         //Calls the showGamescreen method in this class
         this.showGamescreen();
+        
         
     }
     
@@ -60,13 +62,14 @@ public class FortressOfDoomFX extends Application {
             stage.show();
             
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
                 public void handle(WindowEvent we) {
                     System.out.println("Stage is closing");
                     stage.close();
                     System.exit(0);
                 }
             });
-        } 
+        }
         catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,7 +80,10 @@ public class FortressOfDoomFX extends Application {
      */
     public static void main(String[] args) {
         
+        //fortressofdoomfx.view.TimerClass timerclass = new fortressofdoomfx.view.TimerClass();
+        //timerclass.run();
         launch(args);
+        
     }
     
 }

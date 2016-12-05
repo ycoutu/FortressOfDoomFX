@@ -59,7 +59,7 @@ public class FortressOfDoomFX extends Application {
             Scene scene = new Scene(game);
             //Sets the title of the "JFrame"
             stage.setTitle("Fortress of Doom");
-            Image icon = new Image(getClass().getResourceAsStream("/res/FoDLogo.png"));
+            Image icon = new Image(getClass().getResourceAsStream("res/FoDLogo.png"));
             stage.getIcons().add(icon);
             stage.setScene(scene);
             stage.show();

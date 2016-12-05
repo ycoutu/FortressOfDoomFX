@@ -15,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.WindowEvent;
@@ -58,6 +59,8 @@ public class FortressOfDoomFX extends Application {
             Scene scene = new Scene(game);
             //Sets the title of the "JFrame"
             stage.setTitle("Fortress of Doom");
+            Image icon = new Image(getClass().getResourceAsStream("/res/FoDLogo.png"));
+            stage.getIcons().add(icon);
             stage.setScene(scene);
             stage.show();
             

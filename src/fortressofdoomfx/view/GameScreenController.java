@@ -14,6 +14,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Tooltip;
 
 
 /**
@@ -46,6 +48,10 @@ public class GameScreenController implements Initializable {
     @FXML private Label forestCartLabel;
     @FXML private Label forestTrapLabel;
     @FXML private Label forestHutLabel;
+    
+    @FXML private Tooltip trapTooltip;
+    @FXML private Tooltip cartTooltip;
+    @FXML private Tooltip hutTooltip;
     
     //@FXML private Timer timerfx;
     //private Timer timer = new Timer();
@@ -76,8 +82,11 @@ public class GameScreenController implements Initializable {
         forestCartLabel.setText("");
         forestTrapLabel.setText("");
         forestHutLabel.setText("");
-
-       tm.run();
+        
+        //ruinPowerLabel.textProperty().bind(new SimpleIntegerProperty(tm.event.resource.power).asString());
+        //forestPowerLabel.textProperty().bind(new SimpleIntegerProperty(tm.event.resource.power).asString());
+        
+        tm.run();
       
     }
     public void buttonCooldown(Button button, int duration)
@@ -131,6 +140,8 @@ fiveSecondsWonder.play(); */
         tm.event.resource.incrementPower();
         
         //Labels
+        //ruinPowerLabel.textProperty().bind(new SimpleIntegerProperty(tm.event.resource.power).asString());
+        //forestPowerLabel.textProperty().bind(new SimpleIntegerProperty(tm.event.resource.power).asString());
         ruinPowerLabel.setText(Integer.toString(tm.event.resource.getPower()));
         forestPowerLabel.setText(Integer.toString(tm.event.resource.getPower()));
         
@@ -156,6 +167,8 @@ fiveSecondsWonder.play(); */
         messages.appendText("not very glamorous, but wood is useful." + "\n");
         
         //Labels
+        //ruinWoodLabel.textProperty().bind(new SimpleIntegerProperty(tm.event.resource.wood).asString());
+        //forestWoodLabel.textProperty().bind(new SimpleIntegerProperty(tm.event.resource.wood).asString());
         ruinWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
         forestWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
         
@@ -184,6 +197,8 @@ fiveSecondsWonder.play(); */
             
             //Label
             forestCartLabel.setText(Integer.toString(1));
+            //ruinWoodLabel.textProperty().bind(new SimpleIntegerProperty(tm.event.resource.wood).asString());
+            //forestWoodLabel.textProperty().bind(new SimpleIntegerProperty(tm.event.resource.wood).asString());
             ruinWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
             forestWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
         }
@@ -201,6 +216,9 @@ fiveSecondsWonder.play(); */
             messages.appendText("more traps to catch more creatures." + "\n");
              
             //Label
+            //forestTrapLabel.textProperty().bind(new SimpleIntegerProperty(tm.event.resource.trap).asString());
+            //ruinWoodLabel.textProperty().bind(new SimpleIntegerProperty(tm.event.resource.wood).asString());
+            //forestWoodLabel.textProperty().bind(new SimpleIntegerProperty(tm.event.resource.wood).asString());
             forestTrapLabel.setText(Integer.toString(tm.event.resource.getTrap()));
             ruinWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
             forestWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
@@ -227,6 +245,8 @@ fiveSecondsWonder.play(); */
             
             //Label
             forestHutLabel.setText(Integer.toString(tm.event.resource.getHut()));
+            //ruinWoodLabel.textProperty().bind(new SimpleIntegerProperty(tm.event.resource.wood).asString());
+            //forestWoodLabel.textProperty().bind(new SimpleIntegerProperty(tm.event.resource.wood).asString());
             ruinWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
             forestWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
             
@@ -243,8 +263,22 @@ fiveSecondsWonder.play(); */
     }
     
     public void updateWoodLabel() {
-        ruinWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
-        forestWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
+        
+        //ruinWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
+        //forestWoodLabel.setText(Integer.toString(tm.event.resource.getWood()));
     }
+    
+    public void setTrapTooltip() {
+        trapTooltip.setText("Wood   " + Integer.toString(tm.event.resource.getTrapCost()));
+    }
+    
+    public void setCartTooltip() {
+        cartTooltip.setText("Wood   30");
+    }
+    
+    public void setHutTooltip() {
+        hutTooltip.setText("Wood   " + Integer.toString(tm.event.resource.getHutCost()));
+    }
+    
     
 }

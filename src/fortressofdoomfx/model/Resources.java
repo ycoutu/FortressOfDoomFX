@@ -8,13 +8,13 @@ import javafx.scene.control.TextArea;
 
 
 public class Resources {
-    int power = 0;
-    int wood = 0;
-    int hut = 0;
+    public int power = 0;
+    public int wood = 0;
+    public int hut = 0;
     int hutCost = 100;
     int minion = 0;
     int minionCap = 0;
-    int trap = 0;
+    public int trap = 0;
     int trapCost = 10;
     boolean cart = false;
      @FXML private TextArea messages;
@@ -40,6 +40,7 @@ public class Resources {
         }
         System.out.println("Wood: " + wood);
     }
+    
     public void incrementWoodOverTime()
     {
         if(minion > 1)
@@ -151,6 +152,8 @@ public class Resources {
         
         System.out.println("Trap: " + trap);
         System.out.println("Wood: " + wood);
+        
+        this.setTrapCost();
     }
     
     public void incrementHut() {
@@ -173,7 +176,10 @@ public class Resources {
         
         System.out.println("Huts: " + hut);
         System.out.println("Wood: " + wood);
+        
+        this.setHutCost();
     }
+    
     public void incrementMinion()
     {
         minionCap = hut * 4;
@@ -190,7 +196,11 @@ public class Resources {
         }
         
         System.out.println(minion + " Minions exist with " + hut + " Huts in existence" );
-       
+    }
+    
+    public void purchaseWood() {
+        power -= 1;
+        wood += 10;
     }
     
     public int getPower() {

@@ -5,6 +5,7 @@
  */
 package fortressofdoomfx.view;
 
+
 import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -12,7 +13,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import fortressofdoomfx.view.GameScreenController;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TextArea;
+
 
 /**
  *
@@ -20,15 +24,17 @@ import javafx.fxml.FXMLLoader;
  */
 public class Events {
 
+
     FXMLLoader loader = new FXMLLoader();
     GameScreenController controller = loader.getController();
     
     fortressofdoomfx.model.Resources resource = new fortressofdoomfx.model.Resources();
-    Events()
-    {}
     
+    boolean dialogFlag;
+   
+    //@FXML TextArea messages;
     
-    public void MerchantEvent()
+    public boolean MerchantEvent(TextArea textArea)
     {
         
         //Alternative to use of 'Alert' popup type
@@ -41,6 +47,8 @@ public class Events {
         dp.getButtonTypes().setAll(btnWood, btnScales, btnGoodbye);
             d.setDialogPane(dp);
             d.showAndWait();*/
+        
+        dialogFlag = true;
          Alert encounter = new Alert(Alert.AlertType.NONE);
            encounter.setTitle("You've encountered a travelling merchant!");
            encounter.setHeaderText("Event");
@@ -55,12 +63,28 @@ public class Events {
         
                 boolean inEncounter = true;
 
+
                 while(inEncounter)
                 {
                     Optional<ButtonType> selection = encounter.showAndWait();
                     if(selection.get() == btnWood)
                     {
+                        //textArea.appendText("Wood Purchased");
+                        //messages.appendText("Wood Purchased");
                         System.out.println("Wood Purchased");
+                        if(resource.getPower() >= 1)
+                        {
+                            System.out.println(resource.getPower());
+                            System.out.println(resource.getWood());
+                            resource.purchaseWood();
+                            System.out.println(resource.getPower());
+                            System.out.println(resource.getWood());
+                        }
+                        if(resource.getPower() < 1)
+                        {
+                            System.out.println("Not enough power");
+                        }
+
 
                     }
                     else if(selection.get() == btnScales)
@@ -74,9 +98,13 @@ public class Events {
                         
                     }
                 }
+                
+                return dialogFlag = false;
     }
-    public void EnemyEvent()
+    public boolean EnemyEvent(TextArea textArea)
     {
+        
+     dialogFlag = true;
      Alert EnemyEncounter = new Alert(Alert.AlertType.NONE);
            EnemyEncounter.setTitle("A Hero Approaches");
            EnemyEncounter.setHeaderText("Hero Event");
@@ -91,7 +119,9 @@ public class Events {
            Optional<ButtonType> selection = EnemyEncounter.showAndWait();
                     if(selection.get() == btnChallenge)
                     {
-                        System.out.println("You challenge him, you win and theres probably a consequence that i need to add");
+                        //textArea.appendText("You challenge him, you win and theres probably a consequence that i need to add");
+                        //System.out.println("You challenge him, you win and theres probably a consequence that i need to add");
+
 
                     }
                     else if(selection.get() == btnHide)
@@ -106,7 +136,7 @@ public class Events {
                         EnemyEncounter.close();
                         
                     }
-           
+           return dialogFlag = false;
     }
     public void MinionEvent()
     {
@@ -121,3 +151,9 @@ public class Events {
     
     }
 }
+
+
+
+
+
+

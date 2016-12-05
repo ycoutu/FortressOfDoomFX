@@ -19,6 +19,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextArea;
+
 
 /**
  *
@@ -26,6 +28,7 @@ import javafx.scene.control.ButtonType;
  */
 public class TimerClass implements Runnable {
     
+    @FXML TextArea messages;
     Timer timer = new Timer();
     Random randNum = new Random();
     Events event = new Events();
@@ -42,6 +45,7 @@ public class TimerClass implements Runnable {
     
     public TimerTask EventCheck()
     {
+        
         TimerTask EventTask = new TimerTask(){
         @Override
         public void run()
@@ -55,14 +59,19 @@ public class TimerClass implements Runnable {
                int eventProbability; 
                  eventProbability = randNum.nextInt(5);
                  System.out.println(eventProbability);
+                
+                if(event.dialogFlag != true)
+                {
                  if(eventProbability == 1)
                  {
-                            event.MerchantEvent();  
+                    event.MerchantEvent(messages);  
                  }
                  else if(eventProbability == 2)
                  {
-                     event.EnemyEvent();
+                    event.EnemyEvent(messages);
                  }
+                }
+                 
         });
            
             /* Alert encounter = new Alert(AlertType.CONFIRMATION);
@@ -121,3 +130,7 @@ public class TimerClass implements Runnable {
         }   
     
 }
+
+
+
+
